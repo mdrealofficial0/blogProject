@@ -128,5 +128,19 @@ public function update(Request $request, Post $post)
 
     return redirect()->route('posts.index')->with('success', 'Post updated successfully');
 }
+public function destroy(Post $post)
+    {
+        try {
+            // Delete the featured image if it exists
+            if($post->featured_image && file_exists(public_path($post->featured_image))) {
+                unlink(public_path($post->featured_image));
+            }
+
+            $post->delete();
+            return redirect()->route('posts.index')->with('success', 'Post deleted successfully');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to delete post: ' . $e->getMessage());
+        }
+    }
 
 }
