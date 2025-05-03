@@ -17,6 +17,9 @@
     </div>
     <div>
       <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Update Category</button>
+      @error('name')
+        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+      @enderror
     </div>
   </form>
 </div>
